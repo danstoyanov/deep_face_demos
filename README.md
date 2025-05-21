@@ -1,7 +1,3 @@
-Разбира се, ето една подобрена версия на `README.md` файла за вашия GitHub репозиториум. Включил съм стандартни секции за GitHub, както и няколко допълнителни детайла и съвети:
-
----
-
 # Multifunctional Face Analysis Application (Streamlit)
 
 <p align="center">
