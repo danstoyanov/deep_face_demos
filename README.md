@@ -8,39 +8,65 @@
   <img src="https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python Version">
 </p>
 
-This Streamlit web application provides a comprehensive set of tools for face analysis, leveraging the powerful **DeepFace** library for age, gender, and emotion detection, and **InsightFace** for robust face comparison. It supports analysis from images, videos, and real-time webcam feeds.
+This Streamlit web application provides a comprehensive set of tools for face analysis, leveraging the powerful **DeepFace** library for age, gender, and emotion detection, and **InsightFace** for robust face comparison. It supports analysis from images, videos, and real-time webcam feeds. The application is modularized for better organization and maintainability.
 
 ## 🌟 Features
 
 The application offers four main modes of operation, selectable from the sidebar:
 
 1.  **Image Analysis (DeepFace):**
-    *   Upload an image file (JPG, JPEG, PNG).
-    *   Detects faces and predicts age, gender, and dominant emotion for each.
-    *   Annotates the original image with bounding boxes and analysis results.
+
+    - Upload an image file (JPG, JPEG, PNG).
+    - Detects faces and predicts age, gender, and dominant emotion for each.
+    - Annotates the original image with bounding boxes and analysis results.
+    - Logic handled by `app/face_analysis_image.py`.
 
 2.  **Face Comparison (InsightFace):**
-    *   Upload two images.
-    *   Uses InsightFace to extract high-dimensional face embeddings.
-    *   Calculates the cosine similarity between the two embeddings to determine facial resemblance.
-    *   Provides a similarity score and an interpretation based on a predefined threshold.
+
+    - Upload two images.
+    - Uses InsightFace to extract high-dimensional face embeddings.
+    - Calculates the cosine similarity between the two embeddings to determine facial resemblance.
+    - Provides a similarity score and an interpretation based on a predefined threshold.
+    - Logic handled by `app/face_comparison.py`.
 
 3.  **Video Emotion Analysis (DeepFace):**
-    *   Upload a video file (MP4, AVI, MOV, MKV).
-    *   Processes the video frame by frame (with an adjustable frame skip for performance).
-    *   Detects faces and identifies the dominant emotion in each analyzed frame.
-    *   Generates a new video file with faces annotated with their detected emotions.
-    *   Presents a bar chart summary of all detected emotions throughout the video.
-    *   Offers a download option for the processed video.
+
+    - Upload a video file (MP4, AVI, MOV, MKV).
+    - Processes the video frame by frame (with an adjustable frame skip for performance).
+    - Detects faces and identifies the dominant emotion in each analyzed frame.
+    - Generates a new video file with faces annotated with their detected emotions.
+    - Presents a bar chart summary of all detected emotions throughout the video.
+    - Offers a download option for the processed video and attempts to display it in the browser.
+    - Logic handled by `app/video_emotion_analysis.py`.
 
 4.  **Webcam Real-time Analysis (DeepFace):**
-    *   Activates your local webcam for live face detection and analysis.
-    *   Provides real-time estimates of age, gender, and dominant emotion for detected faces directly on the live feed.
-    *   Allows selection of different DeepFace detector backends to optimize performance based on your hardware.
+    - Activates your local webcam for live face detection and analysis.
+    - Provides real-time estimates of age, gender, and dominant emotion for detected faces directly on the live feed.
+    - Allows selection of different DeepFace detector backends to optimize performance.
+    - Logic handled by `app/webcam_realtime_analysis.py`.
+
+Shared utilities and configuration are managed by `app/utils.py` and `app/config.py` respectively. The main application entry point is `app/main.py`.
+
+## 📁 Project Structure
+
+```
+your-repo-name/
+├── app/
+│   ├── main.py                   # Main application entry point
+│   ├── config.py                 # Global configurations
+│   ├── utils.py                  # Shared utility functions (model loading, image resize)
+│   ├── face_analysis_image.py    # Mode 1: Image Analysis
+│   ├── face_comparison.py        # Mode 2: Face Comparison
+│   ├── video_emotion_analysis.py # Mode 3: Video Emotion Analysis
+│   ├── webcam_realtime_analysis.py # Mode 4: Webcam Real-time Analysis
+│   └── bdu_black_logo.jpg        # Example logo file
+├── requirements.txt              # Python dependencies
+└── README.md                     # This file
+```
 
 ## 📸 Screenshots / Demo
 
-*(It is highly recommended to add screenshots or a short GIF/video demonstrating the application here once it's deployed or running.)*
+_(It is highly recommended to add screenshots or a short GIF/video demonstrating the application here once it's deployed or running.)_
 
 ## 🚀 Getting Started
 
@@ -48,20 +74,25 @@ Follow these steps to get a copy of the project up and running on your local mac
 
 ### Prerequisites
 
-*   Python 3.8 or newer
-*   `pip` (Python package installer)
+- Python 3.8 or newer
+- `pip` (Python package installer)
+- (Optional but recommended) Git for cloning the repository.
 
 ### Installation
 
-1.  **Clone the repository:**
+1.  **Clone the repository (or download and extract the `app` folder and `requirements.txt`):**
 
     ```bash
     git clone https://github.com/your-username/your-repo-name.git
     cd your-repo-name
     ```
-    *(Remember to replace `your-username/your-repo-name` with the actual path to your repository.)*
 
-2.  **Create a virtual environment (recommended):**
+    _(Remember to replace `your-username/your-repo-name` with the actual path to your repository.)_
+
+2.  **Navigate to the project directory:**
+    Ensure you are in the directory that _contains_ the `app` folder (e.g., `your-repo-name`).
+
+3.  **Create a virtual environment (recommended):**
 
     ```bash
     python -m venv venv
@@ -71,8 +102,8 @@ Follow these steps to get a copy of the project up and running on your local mac
     source venv/bin/activate
     ```
 
-3.  **Create `requirements.txt`:**
-    Create a file named `requirements.txt` in the root directory of your project (where `second_streamlit_deepface_app.py` is located) and paste the following content into it:
+4.  **Create/Verify `requirements.txt`:**
+    Ensure a file named `requirements.txt` exists in the root project directory (the one containing the `app` folder). It should have the following content:
 
     ```
     streamlit>=1.30.0
@@ -80,7 +111,7 @@ Follow these steps to get a copy of the project up and running on your local mac
     opencv-python>=4.5.0
     numpy>=1.20.0
     Pillow>=9.0.0
-    
+
     # Required for the Face Comparison (InsightFace) feature:
     # Choose either onnxruntime (CPU) or onnxruntime-gpu (GPU)
     insightface
@@ -89,7 +120,7 @@ Follow these steps to get a copy of the project up and running on your local mac
     scikit-learn
     ```
 
-4.  **Install dependencies:**
+5.  **Install dependencies:**
 
     ```bash
     pip install -r requirements.txt
@@ -101,55 +132,57 @@ Follow these steps to get a copy of the project up and running on your local mac
 ### Usage
 
 1.  **Run the Streamlit application:**
+    From the root project directory (the one containing the `app` folder), run:
 
     ```bash
-    streamlit run second_streamlit_deepface_app.py
+    streamlit run app/main.py
     ```
 
 2.  **Access the application:**
     Your default web browser will automatically open to the Streamlit application, usually at `http://localhost:8501`.
 
 3.  **Initial Model Downloads:**
-    The first time you run the application, DeepFace and InsightFace models will be downloaded and cached. This process might take some time, especially for DeepFace models. A progress message will be displayed in the Streamlit interface.
+    The first time you run the application, DeepFace and InsightFace models will be downloaded and cached. This process might take some time, especially for DeepFace models. Progress messages will be displayed in the Streamlit interface.
 
 ## ⚙️ Configuration and Notes
 
-*   **Model Caching:** DeepFace and InsightFace models are loaded and cached using `st.cache_resource`. This ensures that models are loaded only once upon application startup or their first use, significantly improving subsequent performance within the same session.
-*   **InsightFace Providers:** The InsightFace model attempts to use `CUDAExecutionProvider` first if available for GPU acceleration. If not successful, it gracefully falls back to `CPUExecutionProvider`.
-*   **Video Processing:** For video analysis, temporary files are created for both the input video and the processed output video. The input video temporary file is cleaned up after processing. The output video temporary file remains until the application is closed or a new video is uploaded, allowing for download.
-*   **Webcam Performance:** Real-time webcam analysis can be computationally intensive. Performance depends heavily on your hardware and the chosen `detector_backend` (e.g., `opencv` is often faster than `retinaface` for real-time).
-*   **`detector_backend`:** DeepFace allows different face detectors.
-    *   `'opencv'`: Fastest, but might be less accurate for smaller or angled faces.
-    *   `'ssd'`: A good balance of speed and accuracy.
-    *   `'mtcnn'`, `'retinaface'`, `'yunet'`: Generally more accurate but slower, especially for real-time applications. `yunet` often offers a good balance of accuracy and speed.
-*   **Logo Display:** The application attempts to load a logo from a file named `bdu_black_logo.jpg` located in the same directory as the script. If you wish to display your own logo, replace this file with your image (or update the `LOGO_PATH` variable in the script).
+- **Model Caching:** DeepFace and InsightFace models are loaded and cached using `st.cache_resource` in `app/utils.py`. This ensures models are loaded only once, improving performance.
+- **InsightFace Providers:** The InsightFace model attempts to use `CUDAExecutionProvider` (GPU) first, falling back to `CPUExecutionProvider` if GPU is unavailable or fails.
+- **Video Processing:**
+  - Temporary files are used for input and output videos.
+  - The `app/config.py` file allows switching between `MP4 (mp4v)` and `AVI (XVID)` for the output video format, which can be useful if one format has playback issues in the browser.
+- **Webcam Performance:** Real-time webcam analysis can be computationally intensive. Performance depends on hardware and the chosen `detector_backend`.
+- **`detector_backend`:** Various DeepFace detectors can be selected in the sidebar for video and webcam modes:
+  - `'opencv'`: Generally fastest.
+  - `'ssd'`, `'mtcnn'`, `'retinaface'`, `'yunet'`: Offer different balances of speed and accuracy.
+- **Logo Display:** The application attempts to load a logo from `app/bdu_black_logo.jpg`. Path and display width are configurable in `app/config.py`.
 
 ## 💡 Troubleshooting
 
-*   **`ModuleNotFoundError`:** Ensure all dependencies from `requirements.txt` are installed. Activate your virtual environment before running `pip install -r requirements.txt`.
-*   **Camera Not Opening:**
-    *   Check if your webcam is connected and enabled.
-    *   Ensure no other applications are using the webcam.
-    *   Grant camera permissions to your browser or system if prompted.
-*   **Model Download Errors:**
-    *   Verify your internet connection.
-    *   Sometimes, temporary network issues can cause failures. Try restarting the application.
-*   **Video Processing Issues:**
-    *   Ensure your `opencv-python` installation has `ffmpeg` support. On some systems, this might require manual installation of `ffmpeg`.
-    *   Check if the video file is corrupted or in an unsupported format.
-*   **InsightFace Model Loading Fails:**
-    *   If you're trying to use `onnxruntime-gpu`, ensure your NVIDIA drivers, CUDA Toolkit, and cuDNN are correctly installed and compatible with your `onnxruntime-gpu` version. Otherwise, stick to `onnxruntime` (CPU version).
+- **`ModuleNotFoundError`:** Ensure all dependencies from `requirements.txt` are installed within your active virtual environment.
+- **`SyntaxError: unterminated string literal`**: This can occur if f-strings in the Python code are accidentally broken across multiple lines during copy-pasting. Ensure long f-strings are on a single line.
+- **Camera Not Opening:**
+  - Check webcam connection and ensure it's enabled.
+  - Verify no other apps are using the webcam.
+  - Grant browser/system camera permissions.
+- **Model Download Errors:**
+  - Check internet connection.
+  - Try restarting the application.
+- **Video Processing/Playback Issues:**
+  - Ensure your `opencv-python` installation has `ffmpeg` support (often included, but might need separate `ffmpeg` installation on some systems).
+  - Try switching the video output format in `app/config.py` (e.g., from MP4 to AVI or vice-versa).
+  - The browser might not support the specific video codec/container combination generated.
+- **InsightFace Model Loading Fails (GPU):**
+  - Ensure correct NVIDIA drivers, CUDA Toolkit, and cuDNN versions compatible with `onnxruntime-gpu`. Otherwise, use the CPU version (`onnxruntime`).
 
 ## 🤝 Contributing
 
-Contributions are welcome! If you have suggestions for improvements or find any issues, please open an issue or submit a pull request.
+Contributions, suggestions, and issue reports are welcome! Please open an issue or submit a pull request.
 
 ## 📄 License
 
-This project is open-source and available under the [MIT License](LICENSE). *(You should create a `LICENSE` file in your repository if you haven't already.)*
+This project is open-source and available under the [MIT License](LICENSE). _(You should create a `LICENSE` file in your repository if you haven't already, e.g., by copying one from choosealicense.com)._
 
 ## 🙏 Acknowledgments
 
-This application was developed by the Department of Computer Systems and Technologies team at Burgas Free University (BFU) / Бургаски свободен университет (БСУ).
-
----
+This application was developed by the Department of Computer Systems and Technologies team at Burgas State University (BSU) / Бургаски държавен университет (БДУ). _(Note: The original text mentioned "Burgas Free University (BFU) / Бургаски свободен университет (БСУ)". I've used "Burgas State University (BDU) / Бургаски държавен университет (БДУ)" as seen in the Python code comments. Please adjust to the correct university name if needed.)_
