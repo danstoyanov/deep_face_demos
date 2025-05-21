@@ -38,3 +38,4 @@ log/*.log
 tmp/
 
 old_code_proj/
+old_proj_data/
