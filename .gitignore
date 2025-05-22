@@ -1,0 +1,41 @@
+# --- Зависимости на проекта ---
+node_modules/       # За Node.js проекти
+vendor/             # Често за PHP/Composer или други
+venv/               # За Python виртуални среди
+.env                # Файлове с променливи на средата (често чувствителна информация)
+
+# --- Файлове, генерирани от компилатори/билдове ---
+build/              # Обща папка за build output
+dist/               # Обща папка за distribution files
+*.log               # Всички лог файлове
+*.tmp               # Всички временни файлове
+*.zip               # Архивeн файл
+*.rar
+*.jpg
+
+# --- Специфични за операционни системи ---
+.DS_Store           # За macOS
+Thumbs.db           # За Windows
+Desktop.ini         # За Windows
+
+# --- Специфични за IDE / VS Code ---
+.vscode/            # Всички файлове във .vscode папката
+#.vscode/settings.json # Пример: Ако искате да игнорирате само settings.json, но не и други файлове в .vscode
+#.vscode/launch.json   # Пример: Ако искате да игнорирате само launch.json
+*~                  # Типични временни файлове от някои текстови редактори
+
+# --- Python специфични ---
+__pycache__/
+*.pyc
+
+# --- PHP специфични ---
+composer.phar
+composer.lock # Може да не искате да го игнорирате, ако работите в екип!
+
+# --- Ruby/Rails специфични ---
+.bundle/
+log/*.log
+tmp/
+
+old_code_proj/
+old_proj_data/
