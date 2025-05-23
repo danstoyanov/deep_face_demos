@@ -90,4 +90,3 @@ st.sidebar.info(
 # Показване на логото, подаваме и максималния размер за преоразмеряване на самото лого изображение
 utils.display_logo_in_sidebar(config.LOGO_PATH, config.LOGO_DISPLAY_WIDTH,
                               config.LOGO_DISPLAY_WIDTH * 2)  # *2 за по-добро качество при resize
-
