@@ -5,6 +5,7 @@ from deepface import DeepFace
 from utils import resize_image_for_display  # Импорт от utils.py
 # MAX_DISPLAY_DIM ще се подаде като аргумент от main.py
 
+
 def render_page(deepface_models_loaded, MAX_DISPLAY_DIM):
     st.header("1. Анализ на изображение (Възраст, Пол, Емоция)")
     st.write("Качете изображение, за да анализирате лицата за възраст, емоция и пол, използвайки DeepFace.")

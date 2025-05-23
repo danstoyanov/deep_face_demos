@@ -1,5 +1,6 @@
+# --- START OF FILE app/config.py ---
 MAX_DISPLAY_DIM = 600
-# Уверете се, че този файл съществува в същата директория като main.py или посочете правилния път
+# Уверете се, че този файл съществува в app/ или посочете правилния път
 LOGO_PATH = "bdu_black_logo.jpg"
 LOGO_DISPLAY_WIDTH = 100
 
@@ -11,7 +12,7 @@ DEFAULT_VIDEO_FPS = 25.0
 
 # --- Настройки за видео кодек ---
 # Пробвайте да промените USE_AVI_XVID на True, ако имате проблеми с MP4 плейването в браузъра
-USE_AVI_XVID = True  # Нагласете на True, за да използвате AVI/XVID
+USE_AVI_XVID = False  # Нагласете на True, за да използвате AVI/XVID
 
 if USE_AVI_XVID:
     VIDEO_OUTPUT_CODEC = 'XVID'
@@ -23,3 +24,8 @@ else:
     VIDEO_OUTPUT_SUFFIX = "_emotions_processed.mp4"
     VIDEO_MIME_TYPE = "video/mp4"
     TEMP_FILE_SUFFIX = "_processed.mp4"
+
+# Constants for Language Model  <--- ДОБАВЕТЕ ТЕЗИ ДВА РЕДА
+LLM_MODEL_DIR = "models"
+LLM_MODEL_NAME = "Phi-3-mini-4k-instruct-q4.gguf"
+# --- END OF FILE app/config.py ---

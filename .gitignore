@@ -39,3 +39,5 @@ tmp/
 
 old_code_proj/
 old_proj_data/
+app/Phi-3-mini-4k-instruct-q4.gguf
+app/models/
