@@ -1,18 +1,24 @@
-# Multifunctional Face Analysis Application (Streamlit)
+# Multifunctional Face Analysis & LLM Chat Application (Streamlit)
 
 <p align="center">
   <img src="https://img.shields.io/badge/Streamlit-App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit App">
   <img src="https://img.shields.io/badge/DeepFace-Analysis-007ACC?style=for-the-badge&logo=python&logoColor=white" alt="DeepFace">
   <img src="https://img.shields.io/badge/InsightFace-Comparison-4CAF50?style=for-the-badge&logo=python&logoColor=white" alt="InsightFace">
-  <img src="https://img.shields.io/badge/OpenCV-ImageProcessing-555555?style=for-the-badge&logo=opencv&logoColor=white" alt="OpenCV">
+  <img src="https://img.shields.io/badge/Llama%20CPP-LLM%20Chat-9C27B0?style=for-the-badge&logo=python&logoColor=white" alt="Llama CPP LLM">
+  <img src="https://img.shields.io/badge/OpenCV-Processing-555555?style=for-the-badge&logo=opencv&logoColor=white" alt="OpenCV">
   <img src="https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python Version">
 </p>
 
-This Streamlit web application, **developed as a university project**, provides a comprehensive set of tools for face analysis. It leverages the powerful **DeepFace** library for age, gender, and emotion detection, and **InsightFace** for robust face comparison. The application supports analysis from images, videos, and real-time webcam feeds, and features a modularized structure for better organization and maintainability.
+This Streamlit web application, **developed as a university project**, provides a comprehensive set of tools for face analysis and an interactive chat experience with a local Large Language Model (LLM). It leverages:
+*   **DeepFace** for age, gender, and emotion detection.
+*   **InsightFace** for robust face comparison.
+*   **Llama CPP (Phi-3 Mini model)** for conversational AI.
+
+The application supports analysis from images, videos, real-time webcam feeds, and features a modularized structure for better organization and maintainability.
 
 ## 🌟 Features
 
-The application offers four main modes of operation, selectable from the sidebar:
+The application offers five main modes of operation, selectable from the sidebar:
 
 1.  **Image Analysis (DeepFace):**
     *   Upload an image file (JPG, JPEG, PNG).
@@ -42,6 +48,12 @@ The application offers four main modes of operation, selectable from the sidebar
     *   Allows selection of different DeepFace detector backends to optimize performance.
     *   Logic handled by `app/webcam_realtime_analysis.py`.
 
+5.  **LLM Chat (Phi-3 Mini via Llama CPP):**
+    *   Interactive chat interface with the `Phi-3-mini-4k-instruct-q4.gguf` model.
+    *   Requires the model file to be downloaded and placed in the `app/models/` directory.
+    *   Utilizes `llama-cpp-python` for running the GGUF model locally.
+    *   Logic handled by `app/language_model_chat.py`.
+
 Shared utilities and configuration are managed by `app/utils.py` and `app/config.py` respectively. The main application entry point is `app/main.py`.
 
 ## 📁 Project Structure
@@ -49,21 +61,24 @@ Shared utilities and configuration are managed by `app/utils.py` and `app/config
 ```
 your-repo-name/
 ├── app/
-│   ├── main.py                   # Main application entry point
-│   ├── config.py                 # Global configurations
-│   ├── utils.py                  # Shared utility functions (model loading, image resize)
-│   ├── face_analysis_image.py    # Mode 1: Image Analysis
-│   ├── face_comparison.py        # Mode 2: Face Comparison
-│   ├── video_emotion_analysis.py # Mode 3: Video Emotion Analysis
-│   ├── webcam_realtime_analysis.py # Mode 4: Webcam Real-time Analysis
-│   └── bdu_black_logo.jpg        # Example logo file
-├── requirements.txt              # Python dependencies
-└── README.md                     # This file
+│   ├── main.py                       # Main application entry point
+│   ├── config.py                     # Global configurations
+│   ├── utils.py                      # Shared utility functions
+│   ├── face_analysis_image.py        # Mode 1: Image Analysis
+│   ├── face_comparison.py            # Mode 2: Face Comparison
+│   ├── video_emotion_analysis.py     # Mode 3: Video Emotion Analysis
+│   ├── webcam_realtime_analysis.py   # Mode 4: Webcam Real-time Analysis
+│   ├── language_model_chat.py        # Mode 5: LLM Chat
+│   ├── models/                         # Directory for LLM models
+│   │   └── Phi-3-mini-4k-instruct-q4.gguf # Example LLM model file (needs to be downloaded)
+│   └── bdu_black_logo.jpg            # Example logo file
+├── requirements.txt                  # Python dependencies
+└── README.md                         # This file
 ```
 
 ## 📸 Screenshots / Demo
 
-*(It is highly recommended to add screenshots or a short GIF/video demonstrating the application here once it's deployed or running.)*
+*(It is highly recommended to add screenshots or a short GIF/video demonstrating the application here once it's deployed or running, showcasing all features including the LLM chat.)*
 
 ## 🚀 Getting Started
 
@@ -77,19 +92,22 @@ Follow these steps to get a copy of the project up and running on your local mac
 
 ### Installation
 
-1.  **Clone the repository (or download and extract the `app` folder and `requirements.txt`):**
-
+1.  **Clone the repository:**
     ```bash
     git clone https://github.com/your-username/your-repo-name.git
     cd your-repo-name
     ```
-    *(Remember to replace `your-username/your-repo-name` with the actual path to your repository.)*
+    *(Replace `your-username/your-repo-name` with the actual path.)*
 
-2.  **Navigate to the project directory:**
-    Ensure you are in the directory that *contains* the `app` folder (e.g., `your-repo-name`).
+2.  **Download the LLM Model:**
+    *   Download the `Phi-3-mini-4k-instruct-q4.gguf` model from [Hugging Face (microsoft/Phi-3-mini-4k-instruct-gguf)](https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-gguf/blob/main/Phi-3-mini-4k-instruct-q4.gguf).
+    *   Create a directory `app/models/` inside your project.
+    *   Place the downloaded `.gguf` file into the `app/models/` directory.
 
-3.  **Create a virtual environment (recommended):**
+3.  **Navigate to the project directory:**
+    Ensure you are in the root directory that *contains* the `app` folder.
 
+4.  **Create a virtual environment (recommended):**
     ```bash
     python -m venv venv
     # On Windows:
@@ -98,9 +116,8 @@ Follow these steps to get a copy of the project up and running on your local mac
     source venv/bin/activate
     ```
 
-4.  **Create/Verify `requirements.txt`:**
-    Ensure a file named `requirements.txt` exists in the root project directory (the one containing the `app` folder). It should have the following content:
-
+5.  **Update/Verify `requirements.txt`:**
+    Ensure your `requirements.txt` file includes `llama-cpp-python`:
     ```
     streamlit>=1.30.0
     deepface
@@ -108,77 +125,65 @@ Follow these steps to get a copy of the project up and running on your local mac
     numpy>=1.20.0
     Pillow>=9.0.0
     
-    # Required for the Face Comparison (InsightFace) feature:
-    # Choose either onnxruntime (CPU) or onnxruntime-gpu (GPU)
+    # For Face Comparison (InsightFace)
     insightface
-    onnxruntime # For CPU-only execution (default)
-    # onnxruntime-gpu # Uncomment this and comment the line above for GPU acceleration (requires NVIDIA CUDA toolkit)
+    onnxruntime # For CPU
+    # onnxruntime-gpu # For GPU
     scikit-learn
+
+    # For LLM Chat
+    llama-cpp-python>=0.2.0 
     ```
 
-5.  **Install dependencies:**
-
+6.  **Install dependencies:**
     ```bash
     pip install -r requirements.txt
     ```
-
-    **Note on InsightFace (GPU vs. CPU):**
-    If you have an NVIDIA GPU and CUDA Toolkit installed, uncomment `onnxruntime-gpu` and comment `onnxruntime` in `requirements.txt` for significantly faster face comparison. Otherwise, `onnxruntime` (CPU version) will be sufficient.
+    **Note on `llama-cpp-python` (GPU vs. CPU):**
+    By default, the LLM will run on the CPU. For GPU acceleration with `llama-cpp-python` (if you have a compatible NVIDIA GPU and CUDA installed), you'll need to compile `llama-cpp-python` with GPU support. This usually involves setting environment variables like `CMAKE_ARGS="-DLLAMA_CUBLAS=on"` before `pip install`. Refer to the [llama-cpp-python documentation](https://github.com/abetlen/llama-cpp-python#installation-with-hardware-acceleration) for detailed instructions. After successful GPU-enabled installation, you can adjust `n_gpu_layers` in `app/language_model_chat.py`.
 
 ### Usage
 
 1.  **Run the Streamlit application:**
-    From the root project directory (the one containing the `app` folder), run:
-
+    From the root project directory, run:
     ```bash
     streamlit run app/main.py
     ```
 
 2.  **Access the application:**
-    Your default web browser will automatically open to the Streamlit application, usually at `http://localhost:8501`.
+    Open `http://localhost:8501` in your web browser.
 
 3.  **Initial Model Downloads:**
-    The first time you run the application, DeepFace and InsightFace models will be downloaded and cached. This process might take some time, especially for DeepFace models. Progress messages will be displayed in the Streamlit interface.
+    *   DeepFace and InsightFace models will be downloaded on first use if not already cached.
+    *   The LLM (Phi-3 Mini) will be loaded from your local `app/models/` directory when you select the "Чат с Езиков Модел" mode. This initial loading might take some time.
 
 ## ⚙️ Configuration and Notes
 
-*   **Model Caching:** DeepFace and InsightFace models are loaded and cached using `st.cache_resource` in `app/utils.py`. This ensures models are loaded only once, improving performance.
-*   **InsightFace Providers:** The InsightFace model attempts to use `CUDAExecutionProvider` (GPU) first, falling back to `CPUExecutionProvider` if GPU is unavailable or fails.
-*   **Video Processing:**
-    *   Temporary files are used for input and output videos.
-    *   The `app/config.py` file allows switching between `MP4 (mp4v)` and `AVI (XVID)` for the output video format, which can be useful if one format has playback issues in the browser.
-*   **Webcam Performance:** Real-time webcam analysis can be computationally intensive. Performance depends on hardware and the chosen `detector_backend`.
-*   **`detector_backend`:** Various DeepFace detectors can be selected in the sidebar for video and webcam modes:
-    *   `'opencv'`: Generally fastest.
-    *   `'ssd'`, `'mtcnn'`, `'retinaface'`, `'yunet'`: Offer different balances of speed and accuracy.
-*   **Logo Display:** The application attempts to load a logo from `app/bdu_black_logo.jpg`. Path and display width are configurable in `app/config.py`.
+*   **Model Caching:** DeepFace, InsightFace, and LLM models are loaded and cached using `st.cache_resource` to improve performance on subsequent uses within the same session.
+*   **LLM Configuration:**
+    *   The LLM model path and name are defined in `app/config.py`.
+    *   CPU/GPU offloading for the LLM (`n_gpu_layers`) is configured in `app/language_model_chat.py` (defaults to CPU).
+*   **Video Processing:** Output format (MP4/AVI) is configurable in `app/config.py`.
+*   **Logo Display:** Configurable via `app/config.py`.
 
 ## 💡 Troubleshooting
 
-*   **`ModuleNotFoundError`:** Ensure all dependencies from `requirements.txt` are installed within your active virtual environment.
-*   **`SyntaxError: unterminated string literal`**: This can occur if f-strings in the Python code are accidentally broken across multiple lines during copy-pasting. Ensure long f-strings are on a single line.
-*   **Camera Not Opening:**
-    *   Check webcam connection and ensure it's enabled.
-    *   Verify no other apps are using the webcam.
-    *   Grant browser/system camera permissions.
-*   **Model Download Errors:**
-    *   Check internet connection.
-    *   Try restarting the application.
-*   **Video Processing/Playback Issues:**
-    *   Ensure your `opencv-python` installation has `ffmpeg` support (often included, but might need separate `ffmpeg` installation on some systems).
-    *   Try switching the video output format in `app/config.py` (e.g., from MP4 to AVI or vice-versa).
-    *   The browser might not support the specific video codec/container combination generated.
-*   **InsightFace Model Loading Fails (GPU):**
-    *   Ensure correct NVIDIA drivers, CUDA Toolkit, and cuDNN versions compatible with `onnxruntime-gpu`. Otherwise, use the CPU version (`onnxruntime`).
+*   **`ModuleNotFoundError`:** Ensure all dependencies from `requirements.txt` are installed in your active virtual environment.
+*   **LLM Model Not Found:** Verify the `.gguf` file is correctly placed in `app/models/` and that `LLM_MODEL_NAME` and `LLM_MODEL_DIR` in `app/config.py` match.
+*   **`llama-cpp-python` errors:**
+    *   If using GPU, ensure proper compilation with GPU support.
+    *   If using CPU, ensure `n_gpu_layers` is set to `0` in `app/language_model_chat.py`.
+    *   Installation can sometimes be tricky; refer to the official `llama-cpp-python` documentation.
+*   **Other issues:** Refer to the troubleshooting points in previous README versions for face analysis features.
 
 ## 🤝 Contributing
 
-Contributions, suggestions, and issue reports are welcome! Please open an issue or submit a pull request.
+Contributions, suggestions, and issue reports are welcome!
 
 ## 📄 License
 
-This project is open-source and available under the [MIT License](LICENSE). *(You should create a `LICENSE` file in your repository if you haven't already, e.g., by copying one from choosealicense.com).*
+This project is open-source and available under the [MIT License](LICENSE).
 
 ## 🙏 Acknowledgments
 
-This application originated as a **university project** by the Department of Computer Systems and Technologies team at Burgas State University (BSU) / Бургаски държавен университет (БДУ).
+This application originated as a **university project** by the Department of Computer Systems and Technologies team at Burgas State University (BSU) / Бургаски държавен университет (БДУ). It integrates powerful open-source libraries like DeepFace, InsightFace, and Llama CPP.
