@@ -8,7 +8,7 @@ from utils import resize_image_for_display, INSIGHTFACE_AVAILABLE  # Импор�
 
 
 def render_page(INSIGHTFACE_AVAILABLE, insightface_model_app, MAX_DISPLAY_DIM, INSIGHTFACE_THRESHOLD):
-    st.header("2. Сравняване на две лица (Cosine Similarity с InsightFace)")
+    st.header("Сравняване на две лица (Cosine Similarity с InsightFace)")
 
     if not INSIGHTFACE_AVAILABLE:
         st.error("Библиотеките 'insightface' или 'scikit-learn' не са инсталирани. Тази функционалност не е достъпна. Моля, инсталирайте ги: `pip install insightface onnxruntime scikit-learn`")

@@ -7,7 +7,7 @@ from utils import resize_image_for_display  # Импорт от utils.py
 
 
 def render_page(deepface_models_loaded, MAX_DISPLAY_DIM):
-    st.header("1. Анализ на изображение (Възраст, Пол, Емоция)")
+    st.header("Анализ на изображение (Възраст, Пол, Емоция)")
     st.write("Качете изображение, за да анализирате лицата за възраст, емоция и пол, използвайки DeepFace.")
 
     if not deepface_models_loaded:
